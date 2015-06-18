@@ -48,8 +48,8 @@ add_action('widgets_init', function(){
 
 add_action('wp_head', function(){
 
-	printf('<!--[if lt IE 9]><script src="%1$s/js/IE9.js" type="text/javascript"></script>'
-	. '<script src="%1$s/js/respond.min.js" type="text/javascript"></script><![endif]-->', get_template_directory_uri());
+	printf('<!--[if lt IE 9]><script src="%1$s/vendor/IE9/index.js.js" type="text/javascript"></script>'
+	. '<script src="%1$s/vendor/respond/dest/respond.min.js" type="text/javascript"></script><![endif]-->', get_template_directory_uri());
 
 });
 
