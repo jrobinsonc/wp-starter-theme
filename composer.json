@@ -1,7 +1,10 @@
 {
   "name": "jrdev/wpst",
   "description": "WordPress Starter Theme",
-  "keywords": ["wordpress", "theme"],
+  "keywords": [
+    "wordpress",
+    "theme"
+  ],
   "license": "MIT",
   "type": "project",
   "authors": [
@@ -14,7 +17,6 @@
     "php": ">=5.5.9",
     "squizlabs/php_codesniffer": "^2.6",
     "phpmd/phpmd": "^2.4",
-    "pdepend/pdepend": "^2.2",
-    "sensiolabs/security-checker": "^3.0"
+    "pdepend/pdepend": "^2.2"
   }
 }
