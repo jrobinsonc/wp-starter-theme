@@ -1,54 +1,100 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
+<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 
-		<?php 
-		if (is_singular())
-			the_title('<h1 class="entry-title">', '</h1>');
-		else
-			the_title('<h1 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h1>');
-		?>
+    <?php show_post_thumbnail(); ?>
+
+    <header class="entry-header">
+        <?php
+        if (is_singular()) :
+            the_title('<h1 class="entry-title">', '</h1>');
+        else :
+            the_title(sprintf('<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink())), '</a></h2>');
+        endif;
+        ?>
+    </header>
+
+	<?php if (is_single()): ?>
+
+    <div class="entry-meta">
+        <?php
+
+        $time_string = sprintf('<time class="entry-date" datetime="%1$s">%2$s</time>',
+            esc_attr(get_the_date('c')),
+            esc_html(get_the_date())
+        );
+
+        $posted_on = sprintf(_x('Posted on %s', 'post date'), $time_string);
 
 
-		<?php if ('post' == get_post_type()): ?>
-		<div class="entry-meta">
-			<?php get_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<?php endif; ?>
+        $byline = sprintf(_x('by %s', 'post author'),
+            '<span class="author vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html(get_the_author()) . '</a></span>'
+        );
 
-	</header><!-- .entry-header -->
+        echo '<span class="posted-on">' . $posted_on . '</span>',
+        '<span class="byline"> ' . $byline . '</span>';
 
-	<div class="entry-content">
-		<?php 
-		if (has_post_thumbnail()): 
+        ?>
+    </div><!-- .entry-meta -->
 
-			if (is_singular()): 
-			?>
+    <?php endif; ?>
 
-			<div class="post-thumbnail">
-				<?php the_post_thumbnail('large'); ?>
-			</div>
 
-			<?php else : ?>
+	<?php if (is_singular()): ?>
 
-			<a class="post-thumbnail" href="<?php the_permalink(); ?>">
-				<?php the_post_thumbnail('thumbnail'); ?>
-			</a>
+    <div class="entry-content">
+        <?php the_content(); ?>
+    </div>
 
-			<?php 
-			endif;
+	<?php else: ?>
 
-		endif; 
-		?>
+    <div class="entry-summary">
 
-		<?php the_content(__('Continue reading') . ' <span class="meta-nav">&rarr;</span>'); ?>
-	</div><!-- .entry-content -->
+        <?php
+        if (has_excerpt())
+            the_excerpt();
+        else
+            the_content();
+        ?>
+
+    </div>
+
+  	<?php endif; ?>
+
+
+	<?php if (is_singular()): ?>
 
 	<footer class="entry-footer">
-		<?php get_entry_footer(); ?>
+		<?php
+
+		if ('post' == get_post_type())
+		{
+		    $categories_list = get_the_category_list(', ');
+
+		    if ($categories_list)
+		        printf('<div class="cat-links">' . __('Posted in: %1$s') . '</div>', $categories_list);
+
+
+		    $tags_list = get_the_tag_list('', ', ');
+
+		    if ($tags_list)
+		        printf('<div class="tags-links">' . __('Tags: %1$s') . '</div>', $tags_list);
+		}
+
+		if (! is_single() && ! is_search() && ! post_password_required() && comments_open())
+		{
+		    echo '<div class="comments-link">';
+		    comments_popup_link(__('Leave a comment'), __('1 Comment'), __('% Comments'));
+		    echo '</div>';
+		}
+
+		?>
 	</footer><!-- .entry-footer -->
+
+	<?php endif; ?>
+
+
 </article><!-- #post-## -->
 
-<?php  
+<?php
 if (is_singular() && comments_open())
 	comments_template();
 ?>

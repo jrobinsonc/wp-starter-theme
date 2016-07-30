@@ -1,19 +1,7 @@
 {
-  "name": "wp-starter-theme",
-  "description": "WP Starter Theme",
-  "version": "0.1.0",
-  "homepage": "https://github.com/jrobinsonc/WP-Starter-Theme",
-  "keywords": [
-    "bootstrap"
-  ],
-  "authors": [
-    "Jose Robinson <jr@joserobinson.com>"
-  ],
-  "ignore": [
-    "vendor"
-  ],
+  "name": "wpst",
   "dependencies": {
-    "IE9": "http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js",
-    "respond": "~1.4.2",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0"
   }
 }

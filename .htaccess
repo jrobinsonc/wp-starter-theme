@@ -1,1 +1,10 @@
+# Prevent directory listing.
 Options -Indexes
+
+Order Deny,Allow
+Allow from all
+
+# Deny direct execution of PHP files.
+<Files ~ "\.php$">
+    Deny from all
+</Files>
