@@ -3,3 +3,10 @@
 node_modules/
 vendor/
 bower_components/
+.sass-cache/
+css/main.min.css
+css/main.min.css.map
+js/main.js
+js/main.min.js
+js/main.min.js.map
+.sublime-grunt.cache

@@ -6,6 +6,24 @@ module.exports = function(grunt) {
     grunt.initConfig({
         phpFiles: ['*.php', 'inc/*.php', 'partials/*.php'],
 
+        sass: {
+            dev: {
+                options: {
+                    style: 'expanded'
+                },
+                files: {
+                    'css/main.min.css': ['css/src/main.scss']
+                }
+            },
+            dist: {
+                options: {
+                    style: 'compressed',
+                    noCache: true
+                },
+                files: '<%= sass.dev.files %>'
+            },
+        },
+
         jshint: {
             options: {
                 jshintrc: '.jshintrc',
@@ -35,6 +53,45 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        browserify: {
+            dev: {
+                options: {
+                    debug: true,
+                },
+                files: {
+                    'js/main.js': ['js/src/main.js']
+                }
+            },
+            dist: {
+                options: {
+                    debug: false
+                },
+                files: '<%= browserify.dev.files %>'
+            }
+        },
+
+        uglify: {
+            dev: {
+                options: {
+                    mangle: false,
+                    beautify: true,
+                    compress: false,
+                    preserveComments: 'all',
+                    sourceMap: true
+                },
+                files: {
+                    'js/main.min.js': ['js/main.js']
+                }
+            },
+            dist: {
+                options: {
+                    sourceMap: true
+                },
+                files: '<%= uglify.dev.files %>'
+            },
+        },
+
         phpcs: {
             application: {
                 src: '<%= phpFiles %>'
@@ -62,13 +119,37 @@ module.exports = function(grunt) {
                 exclude: '.git,bower_components,css,js,node_modules,vendor',
                 suffixes: 'php'
             }
+        },
+
+        watch: {
+            js: {
+                files: ['js/src/main.js'],
+                tasks: ['check-js', 'browserify:dev', 'uglify:dev'],
+                options: {
+                    livereload: true
+                }
+            },
+            sass: {
+                files: ['css/src/*.scss'],
+                tasks: ['sass:dev'],
+                options: {
+                    livereload: true,
+                },
+            },
+            json: {
+                files: ['*.json'],
+                tasks: ['jsonlint']
+            },
         }
 
     });
 
     require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('test', ['jsvalidate', 'jshint', 'jsonlint']);
+    grunt.registerTask('dist', ['sass:dist', 'check-js', 'browserify:dist', 'uglify:dist']);
+    grunt.registerTask('dev', ['sass:dev', 'check-js', 'browserify:dev', 'uglify:dev']);
     grunt.registerTask('check-php', ['phplint', 'phpcs', 'phpmd']);
+    grunt.registerTask('check-js', ['jsvalidate', 'jshint']);
+    grunt.registerTask('default', ['dev', 'watch']);
 
 };

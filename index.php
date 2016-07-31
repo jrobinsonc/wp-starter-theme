@@ -1,35 +1,23 @@
-<?php get_header(); ?>
+<?php get_template_part('partials/layout-start'); ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+<?php if (have_posts()) : ?>
 
-		<?php if (have_posts()) : ?>
+    <?php get_template_part('partials/page-title') ?>
 
-			<?php if (is_search()): ?>
-			<header class="page-header">
-				<h1 class="page-title"><?php printf( __( 'Search Results for: %s' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-			</header><!-- .page-header -->
-			<?php endif; ?>
+    <?php while (have_posts()) : the_post(); ?>
+    <?php get_template_part('content', get_post_format()); ?>
+    <?php endwhile; ?>
 
-			<?php while (have_posts()) : the_post(); ?>
+    <?php
+    the_posts_pagination(array(
+        'prev_text' => __( 'Previous page'),
+        'next_text' => __( 'Next page'),
+        'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page') . ' </span>',
+    ));
+    ?>
 
-				<?php
-				get_template_part('content', get_post_format());
-				// get_template_part('content', get_post_type());
-				?>
+<?php else : ?>
+    <?php get_template_part('content', 'none'); ?>
+<?php endif; ?>
 
-			<?php endwhile; ?>
-
-			<?php show_pagination(); ?>
-
-		<?php else : ?>
-
-			<?php get_template_part('content', 'none'); ?>
-
-		<?php endif; ?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php get_template_part('partials/layout-end'); ?>

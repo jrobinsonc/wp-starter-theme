@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-<meta charset="<?php bloginfo('charset'); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="profile" href="http://gmpg.org/xfn/11">
-<link rel="pingback" href="<?php bloginfo( 'pingback_url'); ?>">
-
-<?php wp_head(); ?>
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
+    <link rel="pingback" href="<?php bloginfo( 'pingback_url'); ?>">
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 
-<div id="page" class="hfeed site">
+    <!--[if lt IE 9]><div style="text-align: center; font-size: 20px; padding: 50px 0; background-color: #FEF49C; color: #444;"><?php _e('You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.', 'wpstartertheme'); ?></div><![endif]-->
 
-	<header id="masthead" class="site-header" role="banner">
-		<h1 class="site-title"><a href="<?php echo esc_url(home_url( '/')); ?>" rel="home"><?php bloginfo( 'name'); ?></a></h1>
+    <div class="page">
 
-		<div class="main-bar">
-			
-			<nav id="primary-navigation" class="site-navigation" role="navigation">
-				<?php wp_nav_menu(array('theme_location' => 'primary')); ?>
-			</nav>
+        <div class="page__top">
+            <div class="container">
+                <?php show_menu('primary'); ?>
+            </div>
+        </div>
 
-			<div class="search-box">
-				<?php get_search_form(); ?>
-			</div>
+        <div class="page__header">
 
-			<div class="clearfix"></div>
-		</div>
+            <div class="container">
+                <a rel="home" class="logo" href="<?php echo esc_url(home_url('/')); ?>"><span><?php bloginfo( 'name'); ?></span></a>
 
-	</header><!-- #masthead -->
+                <p class="site-description">Example template for WP-Starter-Theme using Bootstrap.</p>
 
-	<div id="content" class="site-content">
+            </div>
+
+        </div>

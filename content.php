@@ -79,13 +79,6 @@
 		        printf('<div class="tags-links">' . __('Tags: %1$s') . '</div>', $tags_list);
 		}
 
-		if (! is_single() && ! is_search() && ! post_password_required() && comments_open())
-		{
-		    echo '<div class="comments-link">';
-		    comments_popup_link(__('Leave a comment'), __('1 Comment'), __('% Comments'));
-		    echo '</div>';
-		}
-
 		?>
 	</footer><!-- .entry-footer -->
 

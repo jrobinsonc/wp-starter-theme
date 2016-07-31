@@ -35,7 +35,7 @@ function show_pagination($custom_query = null, $container = '<div class="paginat
 
     $pagination = paginate_links($pagination_array);
 
-    if (is_null($pagination)) 
+    if (is_null($pagination))
         return;
 
     printf($container, $pagination);
@@ -44,7 +44,7 @@ function show_pagination($custom_query = null, $container = '<div class="paginat
 
 /**
  * get_thumb_tag
- * 
+ *
  * @author JoseRobinson.com
  * @link https://gist.github.com/jrobinsonc/3959a3c40138fdb701c8
  * @param int $post_id
@@ -77,45 +77,41 @@ function get_thumb_tag($post_id, $size, $caption = true)
     return $result;
 }
 
-
-function get_posted_on() 
+function show_post_thumbnail()
 {
-    $time_string = sprintf('<time class="entry-date" datetime="%1$s">%2$s</time>',
-        esc_attr(get_the_date('c')),
-        esc_html(get_the_date())
-    );
+    if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
+        return;
+    }
 
-    $posted_on = sprintf(_x('Posted on %s', 'post date'), $time_string);
+    if ( is_singular() ) : ?>
 
-    $byline = sprintf(_x('by %s', 'post author'),
-        '<span class="author vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html(get_the_author()) . '</a></span>'
-    );
+    <span class="post-thumbnail">
+        <?php the_post_thumbnail(); ?>
+    </span>
 
-    echo '<span class="posted-on">' . $posted_on . '</span>',
-    '<span class="byline"> ' . $byline . '</span>';
+    <?php else : ?>
+
+    <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
+        <?php the_post_thumbnail( 'post-thumbnail', ['alt' => get_the_title()] ); ?>
+    </a>
+
+    <?php endif;
 }
 
-
-function get_entry_footer() 
+function show_menu($location, $args = [])
 {
-    if ('post' == get_post_type()) 
-    {
-        $categories_list = get_the_category_list(', ');
+    $def_args = array_merge([
+        'theme_location' => $location,
+        'container' => 'nav',
+        'container_class' => $location . '-menu menu clearfix',
+    ], $args);
 
-        if ($categories_list)
-            printf('<div class="cat-links">' . __('Posted in: %1$s') . '</div>', $categories_list);
+    $def_args['echo'] = false;
 
+    $menu = wp_nav_menu($def_args);
 
-        $tags_list = get_the_tag_list('', ', ');
+    if (! isset($args['menu_id']))
+        $menu = preg_replace('#<ul(.+)id="[^"]+"(.+)>#mU', '<ul$1$2>', $menu);
 
-        if ($tags_list)
-            printf('<div class="tags-links">' . __('Tags: %1$s') . '</div>', $tags_list);
-    }
-
-    if (! is_single() && ! post_password_required() && comments_open()) 
-    {
-        echo '<div class="comments-link">';
-        comments_popup_link(__('Leave a comment'), __('1 Comment'), __('% Comments'));
-        echo '</div>';
-    }
+    echo $menu;
 }

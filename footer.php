@@ -1,13 +1,18 @@
-	</div><!-- #content -->
+    	<footer class="page__footer footer">
+    		<div class="container">
+                <hr>
 
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			Copyright <?php echo date('Y') ?> - <?php bloginfo('name') ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+                <?php show_menu('footer'); ?>
 
-<?php wp_footer(); ?>
+    			<div>&copy; <?php echo date('Y') ?> <?php bloginfo('name') ?></div>
+                <br><br>
+
+    		</div>
+    	</footer>
+
+    </div><!-- #page -->
+
+    <?php wp_footer(); ?>
 
 </body>
 </html>

@@ -1,0 +1,14 @@
+$color-text: #444;
+$color-links: #0000a0;
+
+$font-family-1: 'Lato', sans-serif;
+$font-family-monospace: Consolas, Monaco, Lucida Console, Courier New, monospace;
+
+
+
+// For `ul` an `ol` tags.
+@mixin list-plain {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
