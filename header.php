@@ -18,18 +18,20 @@
             <div class="container">
 
                 <div class="clearfix visible-xs-block">
-                    <a href="#" class="top__navbar-btn" data-toggle="collapse" data-target="#top__navbar"><span class="glyphicon glyphicon-menu-hamburger pull-right" aria-hidden="true"></span></a>
+                    <a href="#" class="top__navbar-btn pull-right" data-toggle="collapse" data-target="#top__navbar"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
                 </div>
 
-                <div class="row" id="top__navbar">
-                    <div class="col-sm-3 col-sm-push-9"><?php get_search_form(); ?></div>
-                    <div class="col-sm-9 col-sm-pull-3"><?php show_menu('primary'); ?></div>
+                <div id="top__navbar">
+                    <div class="row">
+                        <div class="col-sm-3 col-sm-push-9"><?php get_search_form(); ?></div>
+                        <div class="col-sm-9 col-sm-pull-3"><?php show_menu('primary'); ?></div>
+                    </div>
                 </div>
 
             </div>
         </div>
 
-        <div class="page__header">
+        <header class="page__header">
 
             <div class="container">
 
@@ -39,4 +41,4 @@
 
             </div>
 
-        </div>
+        </header>

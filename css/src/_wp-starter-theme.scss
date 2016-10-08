@@ -15,6 +15,10 @@
         }
     }
 
+    #top__navbar {
+
+    }
+
     .search-form {
         $btnSize: 30px;
 
@@ -90,30 +94,62 @@
 
                     &:hover,
                     &:focus {
-                      color: #fff;
-                      text-decoration: none;
+                        color: #fff;
+                        text-decoration: none;
                     }
                 }
 
                 &.current-menu-item {
-                    a {
-                        &:after {
-                            position: absolute;
-                            bottom: 0;
-                            left: 50%;
-                            width: 0;
-                            height: 0;
-                            margin-left: -5px;
-                            vertical-align: middle;
-                            content: " ";
-                            border-right: 5px solid transparent;
-                            border-bottom: 5px solid;
-                            border-left: 5px solid transparent;
+                        a {
+                            &:after {
+                                position: absolute;
+                                width: 0;
+                                height: 0;
+                                margin-left: -5px;
+                                vertical-align: middle;
+                                content: " ";
+                            }
+
+                            color: #fff;
                         }
 
-                        color: #fff;
                     }
 
+                @media (min-width: 768px) {
+                    &.current-menu-item {
+                        a {
+                            &:after {
+                                border-right: 5px solid transparent;
+                                border-bottom: 5px solid;
+                                border-left: 5px solid transparent;
+                                bottom: 0;
+                                left: 50%;
+                            }
+                        }
+                    }
+                }
+
+                @media (max-width: 767px) {
+                    display: block;
+                    border-top: 1px solid #42acca;
+
+                    &:first-child {
+                        border-top-width: 0;
+                    }
+
+                    &.current-menu-item {
+                        a {
+                            text-indent: 15px;
+
+                            &:after {
+                                border-top: 5px solid transparent;
+                                border-bottom: 5px solid transparent;
+                                border-left: 5px solid;
+                                top: calc(50% - 5px);
+                                left: 5px;
+                            }
+                        }
+                    }
                 }
             }
         }
