@@ -7,7 +7,6 @@
  *
  * @author JoseRobinson.com
  * @link https://gist.github.com/jrobinsonc/bb3829f9418d37c02a09
- * @license MIT
  * @version 2.0.0
  * @param object $custom_query An instance of the WP_Query class
  * @param string $container HTML container for the pagination links
@@ -98,20 +97,34 @@ function show_post_thumbnail()
     <?php endif;
 }
 
+/**
+ * show_menu
+ *
+ * @author JoseRobinson.com
+ * @link https://gist.github.com/jrobinsonc/932b7b7d3b724ac4be0399a81e1b3c08
+ * @version 1.0.0
+ * @param string $location
+ * @param array $args
+ * @return string
+ */
 function show_menu($location, $args = [])
 {
     $def_args = array_merge([
         'theme_location' => $location,
-        'container' => 'nav',
-        'container_class' => $location . '-menu menu clearfix',
+        'container' => 'nav', // Here we are using NAV tag as container.
+        'container_class' => $location . '-menu menu clearfix', //
     ], $args);
 
     $def_args['echo'] = false;
 
     $menu = wp_nav_menu($def_args);
 
+    // WordPress adds a generic ID to the container,
+    // this code removes this ID if it was not specified in the arguments.
     if (! isset($args['menu_id']))
         $menu = preg_replace('#<ul(.+)id="[^"]+"(.+)>#mU', '<ul$1$2>', $menu);
+
+    $menu = preg_replace('#<a(.+)href="(/[^"]+)"(.*)>#U', '<a$1href="'. get_bloginfo('url') .'$2"$3>', $menu);
 
     echo $menu;
 }

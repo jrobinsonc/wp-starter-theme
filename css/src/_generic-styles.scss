@@ -1,0 +1,13 @@
+////////////////////
+// Generic styles //
+////////////////////
+
+.widget_nav_menu, nav {
+    ul {
+        @include list-plain;
+
+        li {
+            display: inline-block;
+        }
+    }
+}

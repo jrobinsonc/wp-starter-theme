@@ -1,10 +1,15 @@
-    	<footer class="page__footer footer">
+    	<footer class="page__footer">
     		<div class="container">
                 <hr>
 
-                <?php show_menu('footer'); ?>
+                <div class="text-center">
+                    <?php show_menu('footer'); ?>
+                </div>
 
-    			<div>&copy; <?php echo date('Y') ?> <?php bloginfo('name') ?></div>
+                <div class="text-center">
+                    <div>&copy; <?php echo date('Y') ?> <?php bloginfo('name') ?></div>
+                </div>
+
                 <br><br>
 
     		</div>

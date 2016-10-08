@@ -1,0 +1,20 @@
+//////////////////
+// General Tags //
+//////////////////
+
+a {
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+figure {
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+body {
+    font-family: $font-family-1;
+}
